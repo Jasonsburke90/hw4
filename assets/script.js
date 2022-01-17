@@ -1,6 +1,7 @@
 // global variables
 const startButton = document.getElementById("start");
 const restartButton = document.getElementById("restart");
+const resetButton = document.getElementById("resetbtn");
 const questionDiv = document.getElementById("question");
 const answersDiv = document.getElementById("answers");
 const timerElement = document.getElementById("timer");
@@ -46,7 +47,6 @@ function init() {
   const storedHighScores = JSON.parse(localStorage.getItem("playerHighScore"));
   if (storedHighScores !== null) {
     highScores = storedHighScores;
-    console.log(highScores);
   }
   showScores();
 }
@@ -137,13 +137,12 @@ function startTimer() {
         const newHighScores = [...JSON.parse(savedHighScores), playerScore];
         // save player current score to local storage
         localStorage.setItem("playerHighScore", JSON.stringify(newHighScores));
-
+        // init to make sure array with scores is properly updated and show updated high score
+        init();
         // clear timer
         clearInterval(timer);
         // reveal restart button
         restartButton.hidden = false;
-        // show updated high score
-        showScores();
       }
     }
     // check if time has run out
@@ -176,10 +175,19 @@ function refreshPage() {
   location.reload();
 }
 
+// local storage reset function
+function localstorageReset() {
+  localStorage.clear();
+  refreshPage();
+}
+
 // restart button
 restartButton.addEventListener("click", refreshPage);
 
 // start button
 startButton.addEventListener("click", startTimer);
+
+// reset high scores button
+resetButton.addEventListener("click", localstorageReset);
 
 init();
