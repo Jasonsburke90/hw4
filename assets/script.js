@@ -31,6 +31,12 @@ const questions = [
     answers: ["Class", "ID", "Tag", "CSS Selectors", "All of the above"],
     correct: "All of the above",
   },
+
+  {
+    question: "What method can you use to merge multiple arrays?",
+    answers: ["Merge", "Concat", "Push", "Filter", "All of the Above"],
+    correct: "Concat",
+  },
 ];
 
 var highScores = [];
