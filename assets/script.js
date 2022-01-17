@@ -11,8 +11,8 @@ const highScoreList = document.getElementById("highscorelistid");
 const questions = [
   {
     question: "Which one of these symbols is not a javascript operator?",
-    answers: ["+", "-", "**", "#", "%"],
-    correct: "#",
+    answers: [" + ", " - ", " ** ", " # ", " % "],
+    correct: " # ",
   },
   {
     question: "String, Boolean, and Number are what type of value?",

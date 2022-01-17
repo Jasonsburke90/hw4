@@ -1,11 +1,41 @@
 /* TODO CSS */
 body {
-  font-family: monospace;
   background-color: #171717;
   color: #00ff41;
+  font-family: monospace;
+  margin: auto;
+  padding: 5 rem;
 }
 
 button {
   background-color: darkgreen;
   color: white;
+  font-family: monospace;
+  font-size: larger;
+  margin: auto;
+  padding: 5 rem;
+}
+
+.ai-c {
+  align-items: center;
+}
+
+.d-f {
+  display: flex;
+}
+
+.fxd-c {
+  flex-direction: column;
+}
+
+.fx-w {
+  flex-wrap: wrap;
+}
+
+.jc-c {
+  justify-content: center;
+}
+
+.ta-c {
+  text-align: center;
 }
