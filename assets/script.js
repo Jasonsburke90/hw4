@@ -4,7 +4,7 @@ const restartButton = document.getElementById("restart");
 const questionDiv = document.getElementById("question");
 const answersDiv = document.getElementById("answers");
 const timerElement = document.getElementById("timer");
-const highScoreElement = document.getElementById("highscores");
+const highScoreList = document.getElementById("highscore");
 const questions = [
   {
     question: "Which one of these symbols is not a javascript operator?",
@@ -29,11 +29,18 @@ const questions = [
     correct: "All of the above",
   },
 ];
+
+var highScores = [];
+
 let qIndex = 0;
 let timerCount = 30;
 let isWin = false;
 
 // functions
+function init() {
+  restartButton.hidden = true;
+  let storedHighScores = JSON.parse(localStorage.getItem("highScores"));
+}
 
 // startgame function
 function startGame() {
@@ -93,10 +100,6 @@ function nextQuestion() {
 // win game function
 function winGame() {
   isWin = true;
-
-  // add high score alert/prompt for name to record
-
-  // push prompt to local storage leaderboard
 }
 function startTimer() {
   // starts the game
@@ -109,21 +112,30 @@ function startTimer() {
       // win condition confirmation
       if (isWin && timerCount > 0) {
         alert(`You win!  You had ${timerCount} seconds remaining!`);
-        prompt(
+        let playerName = prompt(
           "Would you like to save your score?  Type your name below and hit okay to do so!"
         );
+        let playerScore = {
+          name: playerName,
+          score: timerCount,
+        };
+        localStorage.setItem("playerCurrentScore", JSON.stringify(playerScore));
         clearInterval(timer);
+        restartButton.hidden = false;
       }
     }
-    // Tests if time has run out
+    // check if time has run out
     if (timerCount <= 0) {
       // clear interval
       clearInterval(timer);
       // loseGame();
       alert("You Lose!  Try again?");
+      restartButton.hidden = false;
     }
   }, 1000);
 }
+
+// local storage functions
 
 // refresh page function
 function refreshPage() {
@@ -135,3 +147,5 @@ restartButton.addEventListener("click", refreshPage);
 
 // start button
 startButton.addEventListener("click", startTimer);
+
+init();
