@@ -28,6 +28,11 @@ const questions = [
   },
 ];
 let qIndex = 0;
+let timerCount = 30;
+let isWin = false;
+
+// functions
+
 // startgame function
 function startGame() {
   // hide start button
@@ -64,15 +69,15 @@ function answerClick() {
   // verify to see answer is correct
   if (clickedAnswer === questions[qIndex].correct) {
     // alert user they got the right answer and add time
-    alert("You got the right answer!");
-
+    alert("You got the right answer! +5 Seconds to your time!");
+    timerCount += 5;
     nextQuestion();
   } else {
     //alert user they got the the answer wrong and remove time from timer
-    alert("You got the wrong answer!");
+    alert("You got the wrong answer!  -5 Seconds to your time!");
+    timerCount -= 5;
   }
 }
-
 // next question function
 function nextQuestion() {
   qIndex++;
@@ -80,16 +85,42 @@ function nextQuestion() {
     displayQuestions();
     // if no further questions end game
   } else {
-    endGame();
+    winGame();
   }
 }
 // end game function
-function endGame() {
+function wingame() {
   isWin = true;
 
   // add high score alert/prompt for name to record
 
   // push prompt to local storage leaderboard
 }
+function startTimer() {
+  // starts the game
+  startGame();
+  // sets timer
+  timer = setInterval(function () {
+    timerCount--;
+    timerElement.textContent = timerCount;
+    if (timerCount >= 0) {
+      // win condition confirmation
+      if (isWin && timerCount > 0) {
+        alert(`You win!  You had ${timerCount} seconds remaining!`);
+        prompt(
+          "Would you like to save your score?  Type your name below and hit okay to do so!"
+        );
+        clearInterval(timer);
+      }
+    }
+    // Tests if time has run out
+    if (timerCount <= 0) {
+      // clear interval
+      clearInterval(timer);
+      // loseGame();
+      alert("You Lose!  Try again?");
+    }
+  }, 1000);
+}
 // game start
-startButton.addEventListener("click", startGame);
+startButton.addEventListener("click", startTimer);
