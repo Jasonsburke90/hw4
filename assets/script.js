@@ -27,3 +27,34 @@ const questions = [
     correct: "All of the above",
   },
 ];
+let qIndex = 0;
+// startgame function
+function startGame() {
+  // hide start button
+  startButton.hidden = true;
+  displayQuestions();
+}
+
+// display questions function
+function displayQuestions() {
+  // clear previous question/answer
+  answersDiv.textContent = "";
+  questionDiv.textContent = "";
+
+  // put question into questiondiv
+  questionDiv.innerHTML = questions[qIndex].question;
+  // loop through answers
+  questions[qIndex].answers.forEach((answer) => {
+    // create answer button
+    const answerBtn = document.createElement("button");
+    // add answer content from const questions array
+    answerBtn.textContent = answer;
+    answerBtn.setAttribute("value", answer);
+    //  add click event listener
+    answerBtn.onclick = answerClick;
+    // append buttons to the answers div
+    answersDiv.appendChild(answerBtn);
+  });
+}
+// game start
+startButton.addEventListener("click", startGame);
