@@ -4,7 +4,7 @@ const restartButton = document.getElementById("restart");
 const questionDiv = document.getElementById("question");
 const answersDiv = document.getElementById("answers");
 const timerElement = document.getElementById("timer");
-const highScoreList = document.getElementById("highscore");
+const highScoreList = document.getElementById("highscorelistid");
 const questions = [
   {
     question: "Which one of these symbols is not a javascript operator?",
@@ -37,9 +37,18 @@ let timerCount = 30;
 let isWin = false;
 
 // functions
+
+// initialize function
 function init() {
+  // hide restart button
   restartButton.hidden = true;
-  let storedHighScores = JSON.parse(localStorage.getItem("highScores"));
+  //   access high scores
+  const storedHighScores = JSON.parse(localStorage.getItem("playerHighScore"));
+  if (storedHighScores !== null) {
+    highScores = storedHighScores;
+    console.log(highScores);
+  }
+  showScores();
 }
 
 // startgame function
@@ -112,30 +121,50 @@ function startTimer() {
       // win condition confirmation
       if (isWin && timerCount > 0) {
         alert(`You win!  You had ${timerCount} seconds remaining!`);
+        // prompts player to provide name
         let playerName = prompt(
           "Would you like to save your score?  Type your name below and hit okay to do so!"
         );
+        // variable for playerscore so both name and score get stored in local storage
         let playerScore = {
-          name: playerName,
-          score: timerCount,
+          currentname: playerName,
+          currentscore: timerCount,
         };
-        localStorage.setItem("playerCurrentScore", JSON.stringify(playerScore));
+        // save player current score to local storage
+        localStorage.setItem("playerHighScore", JSON.stringify(playerScore));
+        // clear timer
         clearInterval(timer);
+        // reveal restart button
         restartButton.hidden = false;
+        // show updated high score
+        showScores();
       }
     }
     // check if time has run out
     if (timerCount <= 0) {
       // clear interval
       clearInterval(timer);
-      // loseGame();
+      // alert player they have lost the game;
       alert("You Lose!  Try again?");
+      // reveal restart button
       restartButton.hidden = false;
     }
   }, 1000);
 }
 
-// local storage functions
+// display high scores function
+function showScores() {
+  console.log(highScores.currentname);
+  highScoreList.innerHTML = "";
+  for (var i = 0; i < highScores.length; i++) {
+    var score = highScores[i];
+    console.log(score);
+    var li = document.createElement("li");
+    li.textContent = score.currentname;
+    li.setAttribute("data-index", i);
+    highScoreList.appendChild(li);
+  }
+}
 
 // refresh page function
 function refreshPage() {
