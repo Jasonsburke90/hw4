@@ -75,14 +75,14 @@ function displayQuestions() {
   // loop through answers
   questions[qIndex].answers.forEach((answer) => {
     // create answer button
-    const answerBtn = document.createElement("button");
+    const answerButton = document.createElement("button");
     // add answer content from const questions array
-    answerBtn.textContent = answer;
-    answerBtn.setAttribute("value", answer);
+    answerButton.textContent = answer;
+    answerButton.setAttribute("value", answer);
     //  add click event listener
-    answerBtn.onclick = answerClick;
+    answerButton.onclick = answerClick;
     // append buttons to the answers div
-    answersDiv.appendChild(answerBtn);
+    answersDiv.appendChild(answerButton);
   });
 }
 
