@@ -50,8 +50,6 @@ function displayQuestions() {
     // add answer content from const questions array
     answerBtn.textContent = answer;
     answerBtn.setAttribute("value", answer);
-    //  add click event listener
-    answerBtn.onclick = answerClick;
     // append buttons to the answers div
     answersDiv.appendChild(answerBtn);
   });
