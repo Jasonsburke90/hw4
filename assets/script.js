@@ -125,13 +125,19 @@ function startTimer() {
         let playerName = prompt(
           "Would you like to save your score?  Type your name below and hit okay to do so!"
         );
-        // variable for playerscore so both name and score get stored in local storage
-        let playerScore = {
+        // variable for playerscore so both name and score get stored in local storage (THIS NEEDS TO BE ADJUSTED)
+
+        const playerScore = {
           currentname: playerName,
           currentscore: timerCount,
         };
+        // TODO, push into high scores something like this, but isn't working yet (i think it's an object/array issue
+        const savedHighScores = localStorage.getItem("playerHighScore") || "[]";
+        const newHighScores = [...JSON.parse(savedHighScores), playerScore];
         // save player current score to local storage
-        localStorage.setItem("playerHighScore", JSON.stringify(playerScore));
+        // TODO local storage only saving one item at a time, I think I need to push to the array then stringify it
+        localStorage.setItem("playerHighScore", JSON.stringify(newHighScores));
+
         // clear timer
         clearInterval(timer);
         // reveal restart button
@@ -151,7 +157,7 @@ function startTimer() {
     }
   }, 1000);
 }
-
+// TODO fix this function not displaying scores from local storage
 // display high scores function
 function showScores() {
   console.log(highScores.currentname);
