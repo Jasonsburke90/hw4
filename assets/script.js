@@ -2,6 +2,8 @@
 const startButton = document.getElementById("start");
 const restartButton = document.getElementById("restart");
 const resetButton = document.getElementById("resetbtn");
+const questionAnswerSection = document.getElementById("questionanswersection");
+const instructionsDiv = document.getElementById("instructions");
 const questionDiv = document.getElementById("question");
 const answersDiv = document.getElementById("answers");
 const timerElement = document.getElementById("timer");
@@ -43,6 +45,8 @@ let isWin = false;
 function init() {
   // hide restart button
   restartButton.hidden = true;
+  // hide timer
+  timer.hidden = true;
   //   access high scores
   const storedHighScores = JSON.parse(localStorage.getItem("playerHighScore"));
   if (storedHighScores !== null) {
@@ -55,6 +59,8 @@ function init() {
 function startGame() {
   // hide start button
   startButton.hidden = true;
+  // hide instructions
+  instructionsDiv.hidden = true;
   displayQuestions();
 }
 
@@ -113,6 +119,8 @@ function winGame() {
 function startTimer() {
   // starts the game
   startGame();
+  // shows timerdiv
+  timer.hidden = false;
   // sets timer
   timer = setInterval(function () {
     timerCount--;
@@ -141,6 +149,8 @@ function startTimer() {
         init();
         // clear timer
         clearInterval(timer);
+        // hide questions and answers
+        questionAnswerSection.hidden = true;
         // reveal restart button
         restartButton.hidden = false;
       }
@@ -151,6 +161,8 @@ function startTimer() {
       clearInterval(timer);
       // alert player they have lost the game;
       alert("You Lose!  Try again?");
+      // hide questions and answers
+      questionAnswerSection.hidden = true;
       // reveal restart button
       restartButton.hidden = false;
     }
@@ -177,7 +189,9 @@ function refreshPage() {
 
 // local storage reset function
 function localstorageReset() {
+  // clear local storage
   localStorage.clear();
+  // run refresh function so scores are removed
   refreshPage();
 }
 
