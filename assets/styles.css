@@ -1,1 +1,11 @@
 /* TODO CSS */
+body {
+  font-family: monospace;
+  background-color: #171717;
+  color: #00ff41;
+}
+
+button {
+  background-color: darkgreen;
+  color: white;
+}

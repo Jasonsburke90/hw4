@@ -130,7 +130,7 @@ function startTimer() {
   // sets timer
   timer = setInterval(function () {
     timerCount--;
-    timerElement.textContent = timerCount;
+    timerElement.textContent = "Time Remaining: " + timerCount;
     if (timerCount >= 0) {
       // win condition confirmation
       if (isWin && timerCount > 0) {
