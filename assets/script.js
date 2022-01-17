@@ -50,9 +50,46 @@ function displayQuestions() {
     // add answer content from const questions array
     answerBtn.textContent = answer;
     answerBtn.setAttribute("value", answer);
+    //  add click event listener
+    answerBtn.onclick = answerClick;
     // append buttons to the answers div
     answersDiv.appendChild(answerBtn);
   });
+}
+
+// click event listener function
+function answerClick() {
+  // define variable for answer user chose
+  let clickedAnswer = this.value;
+  // verify to see answer is correct
+  if (clickedAnswer === questions[qIndex].correct) {
+    // alert user they got the right answer and add time
+    alert("You got the right answer!");
+
+    nextQuestion();
+  } else {
+    //alert user they got the the answer wrong and remove time from timer
+    alert("You got the wrong answer!");
+  }
+}
+
+// next question function
+function nextQuestion() {
+  qIndex++;
+  if (questions.length > qIndex) {
+    displayQuestions();
+    // if no further questions end game
+  } else {
+    endGame();
+  }
+}
+// end game function
+function endGame() {
+  isWin = true;
+
+  // add high score alert/prompt for name to record
+
+  // push prompt to local storage leaderboard
 }
 // game start
 startButton.addEventListener("click", startGame);
