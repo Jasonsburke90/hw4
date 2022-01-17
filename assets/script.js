@@ -1,8 +1,10 @@
 // global variables
 const startButton = document.getElementById("start");
+const restartButton = document.getElementById("restart");
 const questionDiv = document.getElementById("question");
 const answersDiv = document.getElementById("answers");
 const timerElement = document.getElementById("timer");
+const highScoreElement = document.getElementById("highscores");
 const questions = [
   {
     question: "Which one of these symbols is not a javascript operator?",
@@ -88,8 +90,8 @@ function nextQuestion() {
     winGame();
   }
 }
-// end game function
-function wingame() {
+// win game function
+function winGame() {
   isWin = true;
 
   // add high score alert/prompt for name to record
@@ -122,5 +124,14 @@ function startTimer() {
     }
   }, 1000);
 }
-// game start
+
+// refresh page function
+function refreshPage() {
+  location.reload();
+}
+
+// restart button
+restartButton.addEventListener("click", refreshPage);
+
+// start button
 startButton.addEventListener("click", startTimer);
