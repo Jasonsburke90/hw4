@@ -6,6 +6,8 @@ This project is a quiz with high scores from local storage. When the user hits s
 
 ## screenshots
 
+![quiz screenshot](./assets/images/quiz_screenshot.png)
+
 ## links
 
 \* Here is the link to the repo [jasonburke/repo] (https://github.com/Jasonsburke90/hw4)
